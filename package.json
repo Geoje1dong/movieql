@@ -7,9 +7,11 @@
   "author": "Jaehyun Kim<wogus4041@naver.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "graphql-yoga": "^1.17.4",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.0"
   },
   "scripts": {
