@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "description": "Movie API with Graphql",
   "main": "index.js",
-  "repository": "https://github.com/Geoje1dong/movieql",
-  "author": "Jaehyun Kim<wogus4041@naver.com>",
+  "repository": "https://github.com/nomadcoders/movieql",
+  "author": "Nicolas Serrano Arevalo<nico@nomadcoders.co>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "graphql-yoga": "^1.14.8",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "graphql-yoga": "^1.17.4",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^1.19.0"
+    "babel-preset-stage-3": "^6.24.1"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js"
   },
-  "devDependencies": {
-    "babel-preset-stage-3": "^6.24.1"
+  "now": {
+    "alias": "movieql"
   }
 }
