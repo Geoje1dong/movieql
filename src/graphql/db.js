@@ -1,45 +1,52 @@
 import axios from "axios";
-const BASE_URL = "https://yts.am/api/v2/";
-const LIST_MOVIES_URL = `${BASE_URL}list_movies.json`;
-const MOVIE_DETAILS_URL = `${BASE_URL}movie_details.json`;
-const MOVIE_SUGGESTIONS_URL = `${BASE_URL}movie_suggestions.json`;
+const API_KEY = 'api_key=d5f6d7a1803c7ddadee30f4f693b4340';
+const BASE_URL = `http://api.themoviedb.org/3/`;
+const LIST_MOVIES_URL = `${BASE_URL}discover/movie?${API_KEY}&language=ko&sort_by=popularity.desc&include_adult=false&include_video=true`
+let MOVIE_DETAILS_URL 
+let MOVIE_Recommendation
 
-export const getMovies = async (limit, rating) => {
+export const getMovies = async (page) => {
   const {
     data: {
-      data: { movies }
+      results 
     }
   } = await axios(LIST_MOVIES_URL, {
     params: {
-      limit,
-      minimum_rating: rating
+      page
     }
   });
-  return movies;
+  return results;
 };
 
-export const getMovie = async id => {
+export const getMovie = async (id, ) => {
+  MOVIE_DETAILS_URL = `${BASE_URL}movie/${id}?${API_KEY}&language=ko&append_to_response=videos`;
+  const {
+    data
+  } = await axios(MOVIE_DETAILS_URL, {
+  });
+  return data;
+};
+
+export const Recommendation = async (id, ) => {
+  MOVIE_Recommendation = `${BASE_URL}movie/${id}/recommendations?${API_KEY}&language=ko&page=1`;
   const {
     data: {
-      data: { movie }
+      results
+    }
+  } = await axios(MOVIE_Recommendation, {
+  });
+  return results;
+};
+
+export const movieTrailer = async (id, ) => {
+  MOVIE_DETAILS_URL = `${BASE_URL}movie/${id}?${API_KEY}&language=ko&append_to_response=videos`;
+  const {
+    data:{
+      videos:{
+        results
+      }
     }
   } = await axios(MOVIE_DETAILS_URL, {
-    params: {
-      movie_id: id
-    }
   });
-  return movie;
-};
-
-export const getSuggestions = async id => {
-  const {
-    data: {
-      data: { movies }
-    }
-  } = await axios(MOVIE_SUGGESTIONS_URL, {
-    params: {
-      movie_id: id
-    }
-  });
-  return movies;
+  return results[0];
 };
